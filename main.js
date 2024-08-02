@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
 const port = 3000
+const chooseGreeting = require('./utils/pokemon');
 
-app.get('/greet', (req, res) => {
-    const name = req.query.name || 'Guest';
+console.log(chooseGreeting());
+
+app.get('/pokegreet', (req, res) => {
+
     const hours = new Date().getHours();
     let timeOfDay;
 
@@ -15,8 +18,9 @@ app.get('/greet', (req, res) => {
         timeOfDay = 'evening';
     }
 
-    const greeting = `Good ${timeOfDay}, ${name}!`;
-    res.json({ greeting });
+    const greeting = `Good ${timeOfDay}!`;
+    const pokeGreeting = chooseGreeting();
+    res.json({ greeting, pokeGreeting });
 });
 
 app.listen(port, () => {
