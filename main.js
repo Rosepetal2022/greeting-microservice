@@ -4,8 +4,6 @@ const port = process.env.PORT || 3002;
 const chooseGreeting = require('./utils/pokemon');
 const cors = require('cors');
 
-console.log(chooseGreeting());
-
 app.use(cors());
 
 app.get('/pokegreet', (req, res) => {

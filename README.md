@@ -52,10 +52,13 @@ To get a Pokémon-themed greeting, send a GET request to the `/pokegreet` endpoi
 example call in REACT
 Paste code on homepage and the user will get a random greeting. 
 ```bash
+  function App() {
+  const [greeting, setGreeting] = useState('');
+  const [pokeGreeting, setPokeGreeting] = useState('');
+
   useEffect(() => {
-    // Define the function to fetch greeting
     const fetchGreeting = async () => {
-      const apiUrl = 'http://localhost:3002/pokegreet'; // Update with your Glitch URL if deployed
+      const apiUrl = 'http://localhost:3002/pokegreet'; 
 
       try {
         const response = await fetch(apiUrl);
@@ -63,17 +66,24 @@ Paste code on homepage and the user will get a random greeting.
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        // Display the greeting in an alert
-        window.alert(`${data.greeting} ${data.pokeGreeting}`);
+        setGreeting(data.greeting);
+        setPokeGreeting(data.pokeGreeting);
       } catch (error) {
-        // Display an error message in an alert
-        window.alert(`Error: ${error.message}`);
+        console.error(`Error: ${error.message}`);
       }
     };
 
-    // Call the fetchGreeting function
     fetchGreeting();
   }, []);
+
+  return (
+    <div>
+      <h1>Pokemon Greeting!!</h1>
+      <p>{greeting} {pokeGreeting}</p>
+      <img className="pokemon" src="/images/pokemon.jpg" alt="Pokemon" />
+    </div>
+  );
+}
   ```
 
 #### Example Using `curl`
