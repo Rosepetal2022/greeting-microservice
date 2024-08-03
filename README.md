@@ -49,6 +49,33 @@ This project is a simple microservice that provides a random Pokémon-themed gre
 
 To get a Pokémon-themed greeting, send a GET request to the `/pokegreet` endpoint.
 
+example call in REACT
+Paste code on homepage and the user will get a random greeting. 
+```bash
+  useEffect(() => {
+    // Define the function to fetch greeting
+    const fetchGreeting = async () => {
+      const apiUrl = 'http://localhost:3002/pokegreet'; // Update with your Glitch URL if deployed
+
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        // Display the greeting in an alert
+        window.alert(`${data.greeting} ${data.pokeGreeting}`);
+      } catch (error) {
+        // Display an error message in an alert
+        window.alert(`Error: ${error.message}`);
+      }
+    };
+
+    // Call the fetchGreeting function
+    fetchGreeting();
+  }, []);
+  ```
+
 #### Example Using `curl`
 
 You can use the `curl` command-line tool to make the API call. Open your terminal and run:
